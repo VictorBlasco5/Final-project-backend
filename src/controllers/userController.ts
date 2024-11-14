@@ -5,18 +5,22 @@ import { User } from "../models/User";
 //VER TODOS LOS USUARIOS
 export const getUsers = async (req: Request, res: Response) => {
     try {
-        const limit = Number(req.query.limit) || 8; // elijo el limite que yo quiera y sino por defecto me dará 8
-        const page = Number(req.query.page) || 1; //elijo empezar por la pagina que yo quiera y sino por defecto me dará la 1
-        const skip = (page - 1) * limit as number // determinar por qué página quiero empezar
+        // const limit = Number(req.query.limit) || 8; // elijo el limite que yo quiera y sino por defecto me dará 8
+        // const page = Number(req.query.page) || 1; //elijo empezar por la pagina que yo quiera y sino por defecto me dará la 1
+        // const skip = (page - 1) * limit as number // determinar por qué página quiero empezar
 
-        if (limit > 100) {
-            return res.status(404).json(
-                {
-                    success: false,
-                    message: "you have exceeded the limit"
-                }
-            )
-        }
+        // if (limit > 100) {
+        //     return res.status(404).json(
+        //         {
+        //             success: false,
+        //             message: "you have exceeded the limit"
+        //         }
+        //     )
+        // }
+
+        // const totalUsers = await User.count(); // Obtén el total de usuarios
+        // const totalPages = Math.ceil(totalUsers / limit); // Calcula el número total de páginas
+
 
         const users = await User.find(
             {
@@ -30,15 +34,17 @@ export const getUsers = async (req: Request, res: Response) => {
                     image: true,
                 },
                 relations: ['role'],
-                take: limit, //paginación para que me traiga 8 usuarios al hacer la petición.
-                skip: skip
+                // take: limit, //paginación para que me traiga 8 usuarios al hacer la petición.
+                // skip: skip
             }
         )
 
         res.status(200).json({
             success: true,
             message: "users retrieved successfully",
-            data: users
+            data: users,
+            // totalItems: totalUsers,  // Total de usuarios disponibles
+            // totalPages: totalPages   // Número total de páginas
         })
 
     } catch (error) {
