@@ -100,7 +100,7 @@ export const matchSeedDatabase = async () => {
 
         const match8 = new Match();
         match8.number_players = 6;
-        match8.signed_up = JSON.stringify([1, 5, 8, 2, 7, 14]) as any;
+        match8.signed_up = JSON.stringify([1, 5, 8, 7, 14]) as any;
         match8.information = "Partido de amigos número 8";
         match8.match_date = "2024-05-27 15:30:00";
         const court8 = new Court()

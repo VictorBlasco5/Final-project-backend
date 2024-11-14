@@ -12,7 +12,7 @@ const launchSeeders = async () => {
     await courtSeedDatabase();
     await matchSeedDatabase();
     await userMatchSeedDatabase();
-    await favoriteCourtSeedDatabase();
+    // await favoriteCourtSeedDatabase();
 }
 
 launchSeeders();
