@@ -17,7 +17,7 @@ export class Match extends BaseEntity{
     @Column({ name: 'information' })
     information!:string
 
-    @Column({ name: 'match_date' })
+    @Column({ type: 'timestamp', name: 'match_date' })
     match_date!:string
 
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })

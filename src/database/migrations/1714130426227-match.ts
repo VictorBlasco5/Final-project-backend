@@ -29,12 +29,11 @@ export class Match1714130426227 implements MigrationInterface {
                     {
                         name: "information",
                         type: "text",
-                        length: "255",
                         isNullable: false,
                     },
                     {
                         name: "match_date",
-                        type: "datetime",
+                        type: "timestamp",
                         isNullable: false,
                     },
                     {

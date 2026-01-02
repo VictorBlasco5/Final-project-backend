@@ -49,7 +49,6 @@ export class User1714129322306 implements MigrationInterface {
                     {
                         name: "presentation",
                         type: "text",
-                        length: "255",
                         isNullable: true,
                     },
                     {
