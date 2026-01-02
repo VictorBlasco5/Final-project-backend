@@ -240,19 +240,20 @@ export const getMatchesAssistance = async (req: Request, res: Response) => {
         const { userId } = req.tokenData;
 
         const matches = await Match.createQueryBuilder("match")
-            .innerJoinAndSelect("match.court", "court")
-            .innerJoinAndSelect("match.user", "user")
-            .where(`JSON_CONTAINS(match.signed_up, :userId)`, { userId: JSON.stringify(userId) })
+            .leftJoinAndSelect("match.court", "court")
+            .leftJoinAndSelect("match.user", "user")
             .getMany();
 
+        const filtered = matches.filter(match =>
+            match.signed_up.includes(userId)
+        );
 
-        res.status(200).json(
-            {
-                success: true,
-                message: "Matches retrieved successfully",
-                data: matches
-            }
-        )
+        res.status(200).json({
+            success: true,
+            message: "Matches retrieved successfully",
+            data: filtered
+        });
+
     } catch (error) {
         res.status(500).json({
             success: false,
